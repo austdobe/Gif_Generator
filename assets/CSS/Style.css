@@ -1,26 +1,82 @@
 body{
-    background-color: rgb(250, 250, 3);
+    background-color: rgb(68, 68, 65);
 
 }
 .navBar{
-    background-color: orangered;
+    background-color: rgb(72, 90, 253);
     margin: 5px auto;
-    height: 75px;
     padding: 10px 20px;
+    overflow: auto;
 
 }
 .textField{
-    margin: 0 20px;
+    margin: 20px 30px;
     width: 300px;
 }
-h1{
+h2{
     color: white;
-    margin: 0 20px;
+    margin: 5px 30px;
+    font-size: 20px
+    
 }
 .footer{
-    background-color: orangered;
+    height: 50px;
+    width: 100%;
+    background-color: rgb(72, 90, 253);
 }
 .btn-default{
     color: ghostwhite;
-    background-color: yellow;
+    background-color: rgba(2, 203, 253, 0.856);
+    margin: 3px 10px;
+    display:inline-block;
+    
+
 }
+.display{
+    width: 98%;
+    background-color: aqua;
+    margin: 0 auto;
+    overflow: auto;
+}
+h1{
+    color: aliceblue;
+    font-weight: bold;
+    text-decoration: aliceblue underline;
+    font-size:34px;
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    word-wrap: inherit;
+}
+.gifContainer{
+    background-color: rgba(0, 183, 255, 0.65);
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: auto;
+}
+.container{
+    background-color: rgba(0, 183, 255, 0.514);
+    padding-top:5px;
+    
+}
+.btn{
+    font-size:16px;
+    font-weight: 400;
+}
+.searchBar{
+    margin-top:20px
+}
+.title{
+    margin-top: 30px;
+}
+.card{
+    background-color: white;
+    overflow: auto;
+    margin:5px 10px;
+    display:inline;
+    padding: 10px 10px;
+    border-radius: 20px;
+}
+
+
+
