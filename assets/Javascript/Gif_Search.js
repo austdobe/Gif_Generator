@@ -1,3 +1,5 @@
+
+
 //Set Javascript to start after HTML && CSS load
 $(document).ready(function(){
     var topics = ["Fast and Furious", "Billy Madison", "The Heat",]
@@ -5,13 +7,13 @@ $(document).ready(function(){
     //function to display gifs
     function pullGifs(){
 
-        var subject = $(this).attr("data-subject");
-        var userURL = "https://api.giphy.com/v1/gifs/search?api_key=w1KQjzOLh8MH06aaFFX6dHG4DuG8vv5D&q="+subject+"&limit=25&offset=0&rating=G&lang=en"
+        var subject = $(this).attr("data-subject")
+        var userURL = "https://api.giphy.com/v1/gifs/search?api_key=w1KQjzOLh8MH06aaFFX6dHG4DuG8vv5D&q="+ subject +"&limit=25&offset=0&rating=G&lang=en"
         console.log("pull", subject)
         //start the request for subject defined above
         $.ajax({
-                url: userURL,
-                method: "GET"
+            url: userURL,
+            method: "GET"
         }).then(function(response) {
                 console.log(response);
         $("#displayGif").text(" ")
@@ -28,7 +30,9 @@ $(document).ready(function(){
 
     
     function createButtons(){
-        $(".myGifs").text(" ")
+        //Clear buttons to start fresh
+        $(".myGifs").empty()
+        //loop the topics array to create buttons
         for(var j = 0; j<topics.length; j++){
             var gifButtons = $("<button>").addClass("btn-default").attr("data-subject", topics[j])
             gifButtons.text(topics[j])
@@ -46,10 +50,13 @@ $(document).ready(function(){
         $("#displayGif").text(" ")
         
         for(var i = 0; i<10; i++){
-            var gifDiv = $("<img>").addClass("card card-text-overlay")
+            var gifDiv = $("<div>").addClass("card")
+            var gif = $("<img>").addClass("card-img");
             var rating= response.data[i].rating;
-            gifDiv.append(rating)
-            gifDiv.attr("src", response.data[i].images.fixed_height.url)
+            gifDiv.append(rating).addClass("card-title")
+            gif.attr("data-state", "still")
+            gif.attr("src", response.data[i].images.fixed_height_small_still.url)
+            gifDiv.append(gif)
             $("#displayGif").append(gifDiv)
         }
     });
@@ -59,11 +66,20 @@ $(document).ready(function(){
         var subject = $("#textField").val().trim()
         topics.push(subject)
         createButtons()
-        pullGifs()
-        console.log(topics)
     })
+    $(".gif").on("click", function() {
+        var state = $(this).attr("data-state");
+        
+        if (state === "still") {
+        $(this).attr("src",  response.data[i].images.fixed_height_small.url);
+        $(this).attr("data-state", "animate");
+        } else {
+        $(this).attr("src",  response.data[i].images.fixed_height_small_still.url);
+        $(this).attr("data-state", "still");
+        }
+    });
     
-    $(".btn-default").on("click", ".btn-default",pullGifs)
+    $(document).on("click", ".btn-default", pullGifs)
 
     createButtons()
 });
