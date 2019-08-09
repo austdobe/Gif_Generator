@@ -19,11 +19,27 @@ $(document).ready(function(){
         $("#displayGif").text(" ")
         //loop to add gifs
         for(var i = 0; i<10; i++){
-            var gifDiv = $("<img>").addClass("card")
-            gifDiv.attr("src", response.data[i].images.fixed_height.url)
+            var gifDiv = $("<div>").addClass("card")
+            var gif = $("<img>").addClass("card-img").attr("Id","gif");
+            var rating= response.data[i].rating;
+            gifDiv.append("Rating: " + rating).addClass("card-title")
+            gif.attr("data-state", "still")
+            gif.attr("src", response.data[i].images.fixed_height_small.url)
+            gifDiv.append(gif)
             $("#displayGif").append(gifDiv)
-            
+
         }
+        $("#gif").on("click", function() {
+            var state = $(this).attr("data-state");
+            
+            if (state === "still") {
+            $(this).attr("src",  response.data[i].images.fixed_height_small.url);
+            $(this).attr("data-state", "animate");
+            } else {
+            $(this).attr("src",  response.data[i].images.fixed_height_small_still.url);
+            $(this).attr("data-state", "still");
+            }
+        });
         })
 
     };
@@ -51,14 +67,26 @@ $(document).ready(function(){
         
         for(var i = 0; i<10; i++){
             var gifDiv = $("<div>").addClass("card")
-            var gif = $("<img>").addClass("card-img");
+            var gif = $("<img>").addClass("card-img").attr("Id","gif");
             var rating= response.data[i].rating;
-            gifDiv.append(rating).addClass("card-title")
+            gifDiv.append("Rating: " + rating).addClass("card-title")
             gif.attr("data-state", "still")
-            gif.attr("src", response.data[i].images.fixed_height_small_still.url)
+            gif.attr("src", response.data[i].images.fixed_height_small.url)
             gifDiv.append(gif)
             $("#displayGif").append(gifDiv)
         }
+            $("#gif").on("click", function() {
+                var state = $(this).attr("data-state");
+                
+                if (state === "still") {
+                $(this).attr("src",  response.data[i].images.fixed_height_small.url);
+                $(this).attr("data-state", "animate");
+                } else {
+                $(this).attr("src",  response.data[i].images.fixed_height_small_still.url);
+                $(this).attr("data-state", "still");
+                }
+            });
+        
     });
 
     $("#search").on("click", function(e){
@@ -67,17 +95,7 @@ $(document).ready(function(){
         topics.push(subject)
         createButtons()
     })
-    $(".gif").on("click", function() {
-        var state = $(this).attr("data-state");
-        
-        if (state === "still") {
-        $(this).attr("src",  response.data[i].images.fixed_height_small.url);
-        $(this).attr("data-state", "animate");
-        } else {
-        $(this).attr("src",  response.data[i].images.fixed_height_small_still.url);
-        $(this).attr("data-state", "still");
-        }
-    });
+   
     
     $(document).on("click", ".btn-default", pullGifs)
 
